@@ -25,3 +25,21 @@ monolog:
             level: debug
         console:
             type:  console
+            
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    filters:
+        cssrewrite: ~
+        uglifyjs2:
+            bin:  %kernel.root_dir%/../node_modules/uglify-js/bin/uglifyjs
+            # defines:
+            #     - "XEO_DEBUG=false"
+            compress: 'hoist_vars=false'
+            mangle: true
+            apply_to: "\.js$"
+        uglifycss:
+            bin:  %kernel.root_dir%/../node_modules/uglifycss/uglifycss
+            ugly_comments: true
+            apply_to: "\.css$"
