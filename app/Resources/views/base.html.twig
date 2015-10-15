@@ -2,12 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Exemple App{% endblock %}</title>
+        <meta name="author" content="r.jemaiel">
+        <meta name="description" content="Exemple app">
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascriptFiles %}{% endblock %}
+        {% block footerjs %}{% endblock %}
+        {% block modal %}{% endblock %}
     </body>
 </html>

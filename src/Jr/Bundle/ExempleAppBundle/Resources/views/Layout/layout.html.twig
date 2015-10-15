@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Index{% endblock %}
+{% block stylesheet %}
+{% endblock %}
+
+{% block body %}
+{% spaceless %}
+	<div id="page" class="container-fluid">
+		<div class="row-fluid">
+			{% block content %}{% endblock %}
+                        {% block js %}{% endblock %}
+		</div>
+	</div>
+{% endspaceless %}
+{% endblock %}
+{% block javascriptFiles %}
+{% endblock %}
