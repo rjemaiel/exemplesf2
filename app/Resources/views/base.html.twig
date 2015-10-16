@@ -11,7 +11,7 @@
         <meta name="author" content="r.jemaiel">
         <meta name="description" content="Exemple app">
         {% block stylesheets %}
-        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+            <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
             <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> 
             <!-- Theme CSS -->  
             <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -20,12 +20,11 @@
               <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
             <![endif]-->
         {% stylesheets
-                '@JrExempleAppBundle/Resources/public/css/styles.css'
                 '@JrExempleAppBundle/Resources/public/plugins/bootstrap/css/bootstrap.min.css' 
                 '@JrExempleAppBundle/Resources/public/plugins/font-awesome/css/font-awesome.css'
                 '@JrExempleAppBundle/Resources/public/plugins/github-activity/dist/github-activity-0.1.1.min.css'
                 '@JrExempleAppBundle/Resources/public/plugins/github-activity/dist/octicons/octicons.min.css'
-                combine=true
+                '@JrExempleAppBundle/Resources/public/css/styles.css'
             %}
             <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
@@ -43,7 +42,6 @@
                     '@JrExempleAppBundle/Resources/public/plugins/jquery-rss/dist/jquery.rss.min.js'
                     '@JrExempleAppBundle/Resources/public/plugins/github-activity/dist/mustache/mustache.min.js'
                     '@JrExempleAppBundle/Resources/public/plugins/github-activity/dist/github-activity-0.1.1.min.js'
-                    combine=true
                 %}
                 <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}

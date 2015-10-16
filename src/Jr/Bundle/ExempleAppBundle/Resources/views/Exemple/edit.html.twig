@@ -1,0 +1,20 @@
+{% extends "JrExempleAppBundle:Layout:layout.html.twig" %}
+{% block title %}Edit{% endblock %}
+{% block contentPrimary%}
+<section class="latest section">
+    <div class="section-inner">
+    <h2 class="heading">Exemple Edit</h2>
+        <div class="content">
+            <table class="table table-border">
+                {{ form(edit_form) }}
+            </table>
+            <hr>
+            <div class="actions">
+                <a href="{{ path('exemple') }}" class="btn">
+                    <i class="fa fa-arrow-left"></i> Back to the list
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

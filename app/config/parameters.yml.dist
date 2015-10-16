@@ -16,5 +16,7 @@ parameters:
     mailer_password:   ~
 
     root_less_bin: /usr/local
+
+    locale: fr
     # A secret key that's used to generate certain security-related tokens
     secret:            pMr8eGNhGcpUFuX8CYfw6LU

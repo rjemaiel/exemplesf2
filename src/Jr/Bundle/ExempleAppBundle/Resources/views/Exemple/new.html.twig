@@ -1,0 +1,20 @@
+{% extends "JrExempleAppBundle:Layout:layout.html.twig" %}
+{% block title %}creation{% endblock %}
+{% block contentPrimary%}
+<section class="latest section">
+    <div class="section-inner">
+        <h2 class="heading">Exemple creation</h2>
+        <div class="content">
+            <table class="table table-border">
+                {{ form(form) }}
+            </table>
+            <hr>
+            <div class="actions">
+                <a href="{{ path('exemple') }}" class="btn">
+                    <i class="fa fa-arrow-left"></i> Back to the list
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

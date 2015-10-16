@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block title %}Index{% endblock %}
 {% block stylesheet %}
@@ -6,12 +6,19 @@
 
 {% block body %}
 {% spaceless %}
-	<div id="page" class="container-fluid">
-		<div class="row-fluid">
-			{% block content %}{% endblock %}
-                        {% block js %}{% endblock %}
-		</div>
-	</div>
+ {% include "JrExempleAppBundle:Layout:header.html.twig" %}
+    <div class="container sections-wrapper">
+        <div class="row">
+                    <div class="primary col-md-8 col-sm-12 col-xs-12">
+                        {% block contentPrimary %}{% endblock %}
+                    </div>
+                    <div class="secondary col-md-4 col-sm-12 col-xs-12">
+                        {% block contentSecondary %}{% endblock %}
+                    </div>
+        </div>
+    </div>
+ {% include "JrExempleAppBundle:Layout:footer.html.twig" %}
+{% block js %}{% endblock %}
 {% endspaceless %}
 {% endblock %}
 {% block javascriptFiles %}

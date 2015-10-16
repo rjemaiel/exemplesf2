@@ -1,0 +1,45 @@
+{% extends "JrExempleAppBundle:Layout:layout.html.twig" %}
+{% block title %}Exemple{% endblock %}
+{% block contentPrimary%}
+<section class="latest section">
+    <div class="section-inner">
+        <h2 class="heading">Exemple</h2>
+        <div class="content">
+            <table class="record_properties table table-border">
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ exemple.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Comments</th>
+                        <td>{{ exemple.comments }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <div class="actions">
+                <a href="{{ path('exemple') }}" class="btn">
+                    <i class="fa fa-arrow-left"></i> Back to the list
+                </a>
+                    <a href="{{ path('exemple_edit', { 'id': exemple.id }) }}" class="btn pull-right">
+                    <i class="fa fa-edit"></i> Edit
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{# <ul class="record_actions">
+                <li>
+                    <a href="{{ path('exemple') }}">
+                        Back to the list
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('exemple_edit', { 'id': exemple.id }) }}">
+                        Edit
+                    </a>
+                </li>
+                <li>{{ form(delete_form) }}</li>
+            </ul>#}
+{% endblock %}
