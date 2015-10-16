@@ -21,7 +21,7 @@ class ExempleController extends Controller
     /**
      * Lists all Exemple entities.
      *
-     * @Route("/", name="exemple")
+     * @Route("/", name="exemple", options={"expose"= true})
      * @Method("GET")
      * @Template()
      */
@@ -103,7 +103,7 @@ class ExempleController extends Controller
     /**
      * Finds and displays a Exemple entity.
      *
-     * @Route("/{id}", name="exemple_show")
+     * @Route("/{id}", requirements={"companyId" = "\d+"}, name="exemple_show")
      * @Method("GET")
      * @Template()
      */

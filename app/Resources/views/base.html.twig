@@ -33,21 +33,28 @@
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascriptFiles %}
-            {% javascripts
-                    '@JrExempleAppBundle/Resources/public/js/main.js'
+{# ==================================================
+                        Javascript
+       ================================================== #}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        {% javascripts
                     '@JrExempleAppBundle/Resources/public/plugins/jquery-1.11.2.min.js'
                     '@JrExempleAppBundle/Resources/public/plugins/jquery-migrate-1.2.1.min.js'
                     '@JrExempleAppBundle/Resources/public/plugins/bootstrap/js/bootstrap.min.js'
-                    '@JrExempleAppBundle/Resources/public/plugins/jquery-rss/dist/jquery.rss.min.js'
-                    '@JrExempleAppBundle/Resources/public/plugins/github-activity/dist/mustache/mustache.min.js'
-                    '@JrExempleAppBundle/Resources/public/plugins/github-activity/dist/github-activity-0.1.1.min.js'
+                    '@JrExempleAppBundle/Resources/public/js/main.js'
                 %}
                 <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
-        {% endblock %}
+        {% block javascriptFiles %}{% endblock %}
         {% block footerjs %}{% endblock %}
         {% block modal %}{% endblock %}
+{# ==================================================
+                        END Javascript
+'@JrExempleAppBundle/Resources/public/plugins/jquery-rss/dist/jquery.rss.min.js'
+                    '@JrExempleAppBundle/Resources/public/plugins/github-activity/dist/mustache/mustache.min.js'
+                    '@JrExempleAppBundle/Resources/public/plugins/github-activity/dist/github-activity-0.1.1.min.js'
+       ================================================== #}
     </body>
 </html>
 {% endspaceless %}
