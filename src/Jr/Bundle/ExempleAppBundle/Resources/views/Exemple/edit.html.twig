@@ -5,9 +5,16 @@
     <div class="section-inner">
     <h2 class="heading">Exemple Edit</h2>
         <div class="content">
-            <table class="table table-border">
-                {{ form(edit_form) }}
-            </table>
+            <form method="post" action="{{ path('exemple_update',{'id': exemple.id}) }}" {{ form_enctype(edit_form) }} class="form-edite-exemple">
+                <table class="table table-border">
+                    <div class="col-xs-offset-1">{{form_label(edit_form.name) }}</div>
+                    <div class="col-xs-offset-1">{{form_widget(edit_form.name) }}</div>
+                    <div class="col-xs-offset-1">{{form_label(edit_form.comments) }}</div>
+                    <div class="col-xs-offset-1">{{form_widget(edit_form.comments) }}</div>
+                    {{ form_rest(edit_form)}}
+                    <button class="btn btn-cta-secondary pull-right" type="submit">Update</button>
+                </table>
+            </form>
             <hr>
             <div class="actions">
                 <a href="{{ path('exemple') }}" class="btn">

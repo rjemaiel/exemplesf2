@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Jr\Bundle\ExempleAppBundle\Entity\Exemple;
 use Jr\Bundle\ExempleAppBundle\Form\ExempleType;
 
@@ -29,7 +30,7 @@ class ExempleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $exemples= $em->getRepository('JrExempleAppBundle:Exemple')->findAll();
+        $exemples = $em->getRepository('JrExempleAppBundle:Exemple')->findAll();
 
         return array(
             'exemples' => $exemples
@@ -45,39 +46,38 @@ class ExempleController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Exemple();
-        $form = $this->createCreateForm($entity);
+        $exemple = new Exemple();
+        $form = $this->createCreateForm($exemple);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+            $em->persist($exemple);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('exemple_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('exemple_show', array('id' => $exemple->getId())));
         }
 
         return array(
-            'entity' => $entity,
-            'form' => $form->createView(),
+            'exemple' => $exemple,
+            'form' => $form->createView()
         );
     }
 
     /**
      * Creates a form to create a Exemple entity.
      *
-     * @param Exemple $entity The entity
+     * @param Exemple $exemple The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Exemple $entity)
+    private function createCreateForm(Exemple $exemple)
     {
-        $form = $this->createForm(new ExempleType(), $entity, array(
+        $form = $this->createForm(new ExempleType(), $exemple, array(
             'action' => $this->generateUrl('exemple_create'),
             'method' => 'POST',
             ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }
@@ -91,12 +91,12 @@ class ExempleController extends Controller
      */
     public function newAction()
     {
-        $entity = new Exemple();
-        $form = $this->createCreateForm($entity);
+        $exemple = new Exemple();
+        $form = $this->createCreateForm($exemple);
 
         return array(
-            'entity' => $entity,
-            'form' => $form->createView(),
+            'exemple' => $exemple,
+            'form' => $form->createView()
         );
     }
 
@@ -117,11 +117,8 @@ class ExempleController extends Controller
             throw $this->createNotFoundException('Unable to find Exemple entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         return array(
-            'exemple' => $exemple,
-            'delete_form' => $deleteForm->createView(),
+            'exemple' => $exemple
         );
     }
 
@@ -136,37 +133,33 @@ class ExempleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JrExempleAppBundle:Exemple')->find($id);
+        $exemple = $em->getRepository('JrExempleAppBundle:Exemple')->find($id);
 
-        if (!$entity) {
+        if (!$exemple) {
             throw $this->createNotFoundException('Unable to find Exemple entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditForm($exemple);
 
         return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'exemple' => $exemple,
+            'edit_form' => $editForm->createView()
         );
     }
 
     /**
      * Creates a form to edit a Exemple entity.
      *
-     * @param Exemple $entity The entity
+     * @param Exemple $exemple The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditForm(Exemple $entity)
+    private function createEditForm(Exemple $exemple)
     {
-        $form = $this->createForm(new ExempleType(), $entity, array(
-            'action' => $this->generateUrl('exemple_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+        $form = $this->createForm(new ExempleType(), $exemple, array(
+            'action' => $this->generateUrl('exemple_update', array('id' => $exemple->getId())),
+            'method' => 'POST',
             ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
@@ -175,21 +168,20 @@ class ExempleController extends Controller
      * Edits an existing Exemple entity.
      *
      * @Route("/{id}", name="exemple_update")
-     * @Method("PUT")
+     * @Method("POST")
      * @Template("JrExempleAppBundle:Exemple:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('JrExempleAppBundle:Exemple')->find($id);
+        $exemple = $em->getRepository('JrExempleAppBundle:Exemple')->find($id);
 
-        if (!$entity) {
+        if (!$exemple) {
             throw $this->createNotFoundException('Unable to find Exemple entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($exemple);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
@@ -199,53 +191,34 @@ class ExempleController extends Controller
         }
 
         return array(
-            'entity' => $entity,
+            'exemple' => $exemple,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
      * Deletes a Exemple entity.
      *
-     * @Route("/{id}", name="exemple_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="exemple_delete", options={"expose"= true})
+     * @Method("POST")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction($id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $exemple = $em->getRepository('JrExempleAppBundle:Exemple')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('JrExempleAppBundle:Exemple')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Exemple entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$exemple) {
+            throw $this->createNotFoundException('Unable to find Exemple entity.');
         }
 
-        return $this->redirect($this->generateUrl('exemple'));
-    }
+        $em->remove($exemple);
+        $em->flush();
 
-    /**
-     * Creates a form to delete a Exemple entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-                ->setAction($this->generateUrl('exemple_delete', array('id' => $id)))
-                ->setMethod('DELETE')
-                ->add('submit', 'submit', array('label' => 'Delete'))
-                ->getForm()
-        ;
+        $exemples = $em->getRepository('JrExempleAppBundle:Exemple')->findAll();
+        $params = ['exemples' => $exemples];
+        $content = $this->renderView('JrExempleAppBundle:Exemple:list.html.twig', $params);
+
+        return new JsonResponse(['content' => $content]);
     }
 
 }

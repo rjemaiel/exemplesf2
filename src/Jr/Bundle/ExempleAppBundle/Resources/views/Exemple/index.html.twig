@@ -5,34 +5,13 @@
     <div class="section-inner">
         <h2 class="heading">Exemple list</h2>
         <div class="content">
-            <table class="records_list table table-border">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Comments</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for exemple in exemples %}
-                    <tr>
-                        <td><a href="{{ path('exemple_show', { 'id': exemple.id }) }}">{{ exemple.name }}</td>
-                        <td>{{ exemple.comments }}</td>
-                        <td>
-                            <div class="list-inline">
-                            <a href="{{ path('exemple_show', { 'id': exemple.id }) }}" class="btn"><i class="fa fa-eye"></i> Show</a>
-                            <a href="{{ path('exemple_edit', { 'id': exemple.id }) }}"  class="btn"><i class="fa fa-edit"></i> Edit</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-               <hr>
-               <div class="actions">
-                   <a href="{{ path('exemple_new') }}" class="btn btn-cta-primary">
-                    Create a new entry
-                </a>
-               </div>
+            {% include "JrExempleAppBundle:Exemple:list.html.twig" %}
+            <hr>
+            <div class="actions">
+                <a href="{{ path('exemple_new') }}" class="btn btn-cta-primary">
+                 Create a new exemple
+             </a>
+            </div>
         </div>
     </div>
 </section>
