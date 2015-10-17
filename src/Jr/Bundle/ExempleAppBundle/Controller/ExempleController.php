@@ -31,16 +31,19 @@ class ExempleController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $exemples = $em->getRepository('JrExempleAppBundle:Exemple')->findAll();
+        // Form Exemple
+        $form = $this->createCreateForm(new Exemple());
 
         return array(
-            'exemples' => $exemples
+            'exemples' => $exemples,
+            'form' => $form->createView()
         );
     }
 
     /**
      * Creates a new Exemple entity.
      *
-     * @Route("/", name="exemple_create")
+     * @Route("/", name="exemple_create" , options={"expose"= true})
      * @Method("POST")
      * @Template("JrExempleAppBundle:Exemple:new.html.twig")
      */
@@ -54,14 +57,34 @@ class ExempleController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($exemple);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('exemple_show', array('id' => $exemple->getId())));
         }
+        $errors = iterator_to_array($form->getErrors());
 
-        return array(
-            'exemple' => $exemple,
-            'form' => $form->createView()
-        );
+        if (!$request->isXmlHttpRequest())
+            if ($errors != null)
+                return ['exemple' => $exemple, 'form' => $form->createView()];
+            else
+                return $this->redirect($this->generateUrl('exemple_show', array('id' => $exemple->getId())));
+        else
+            return $this->getResponseContent();
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    private function getResponseContent()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $exemples = $em->getRepository('JrExempleAppBundle:Exemple')->findAll();
+        $params = ['exemples' => $exemples];
+        $list = $this->renderView('JrExempleAppBundle:Exemple:list.html.twig', $params);
+        //From Exemple 
+        $form = $this->createCreateForm(new Exemple());
+        $paramsForm = ['form' => $form->createView()];
+        $newExemple = $this->renderView('JrExempleAppBundle:Exemple:newAjax.html.twig', $paramsForm);
+        $content = ['list' => $list, 'newExemple' => $newExemple];
+
+        return new JsonResponse(['content' => $content]);
     }
 
     /**
