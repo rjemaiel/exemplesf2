@@ -1,0 +1,29 @@
+{% extends "JrExempleAppBundle:Layout:layout.html.twig" %}
+{% block title %}Home{% endblock %}
+{% block contentPrimary %}
+<section class="about section">
+    <div class="section-inner">
+        <h2 class="heading">A propos de moi</h2>
+        <div class="content">
+            <p>In quis ipsum et tortor porttitor aliquam. In vitae finibus odio. Vivamus ac enim eu mauris placerat euismod eu id ante. Nunc facilisis accumsan magna. Nullam orci libero, vestibulum quis ex vel, ultricies auctor arcu. Vestibulum ultricies dolor metus, quis dapibus ligula volutpat nec. Sed sit amet lectus diam. </p>    
+
+            <p>Nullam et metus ultrices, ultrices tellus eget, tincidunt mauris. Nulla ac ante sed nibh interdum luctus. Aliquam malesuada quam justo, nec scelerisque lorem elementum in. Maecenas aliquet vestibulum ligula. Vestibulum finibus dolor nisi, eu feugiat nibh viverra sed. Suspendisse potenti. Praesent convallis augue vel egestas luctus. Integer pulvinar ultricies interdum. Mauris aliquet vulputate nulla, vitae laoreet diam venenatis sed. Aliquam hendrerit tellus maximus orci hendrerit posuere. Aenean id maximus arcu. </p>
+
+        </div>
+    </div>  
+</section>
+{% endblock %}
+ {% block contentSecondary %}
+<aside class="info aside section">
+    <div class="section-inner">
+        <h2 class="heading sr-only">Basic Information</h2>
+        <div class="content">
+            <ul class="list-unstyled">
+                <li><i class="fa fa-map-marker"></i><span class="sr-only">Location:</span>DenDen, TN</li>
+                <li><i class="fa fa-envelope-o"></i><span class="sr-only">Email:</span><a href="#">r.jemaiel.dev@gmail.com</a></li>
+                <li><i class="fa fa-link"></i><span class="sr-only">Website:</span><a href="{{ path('exemple')}}">App Exemple</a></li>
+            </ul>
+        </div>
+    </div>
+</aside>
+{% endblock %}

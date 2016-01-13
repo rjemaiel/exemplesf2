@@ -1,0 +1,28 @@
+{% extends "JrExempleAppBundle:Layout:layout.html.twig" %}
+{% block title %}Exemple liste{% endblock %}
+{% block contentPrimary%}
+<section class="latest section">
+    <div class="section-inner">
+        <h2 class="heading">Exemple list</h2>
+        <div class="content">
+            {% include "JrExempleAppBundle:Exemple:list.html.twig" %}
+            <hr>
+            <div class="actions">
+                <a href="{{ path('exemple_new') }}" class="btn btn-cta-primary">
+                 Create a new exemple
+             </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block contentSecondary %}
+<aside class="info aside section">
+    <div class="section-inner">
+        <h2 class="heading">Exemple creation Ajax</h2>
+        <div class="content">
+            {% include "JrExempleAppBundle:Exemple:newAjax.html.twig" %}
+        </div>
+    </div>
+</aside>
+{% endblock %}

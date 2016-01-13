@@ -1,3 +1,7 @@
-app:
-    resource: "@AppBundle/Controller/"
+jr_exemple_app:
+    resource: "@JrExempleAppBundle/Controller/"
     type:     annotation
+    prefix:   /
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

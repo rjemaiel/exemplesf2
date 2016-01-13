@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Index{% endblock %}
+
+{% block body %}
+{% spaceless %}
+ {% include "JrExempleAppBundle:Layout:header.html.twig" %}
+    <div class="container sections-wrapper">
+        <div class="row">
+                    <div class="primary col-md-8 col-sm-12 col-xs-12">
+                        {% block contentPrimary %}{% endblock %}
+                    </div>
+                    <div class="secondary col-md-4 col-sm-12 col-xs-12">
+                        {% block contentSecondary %}{% endblock %}
+                    </div>
+        </div>
+    </div>
+ {% include "JrExempleAppBundle:Layout:footer.html.twig" %}
+{% endspaceless %}
+{% endblock %}

@@ -1,0 +1,12 @@
+<div class="form-content">
+    <form method="post" action="{{ path('exemple_create') }}" {{ form_enctype(form) }} class="form-create-ajax">
+        <table class="table table-border">
+            <div class="col-xs-offset-1">{{form_label(form.name) }}</div>
+            <div class="col-xs-offset-1">{{form_widget(form.name) }}</div>
+            <div class="col-xs-offset-1">{{form_label(form.comments) }}</div>
+            <div class="col-xs-offset-1">{{form_widget(form.comments) }}</div>
+                    {{ form_rest(form)}}
+            <button class="btn btn-cta-secondary pull-right" type="submit">Create</button>
+        </table>
+    </form>
+</div>
